@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+</head>
+<canvas id="canvas"></canvas>
+
+<script type="text/javascript" src="Rectangle.js">
+</script>
+
+<script type="text/javascript" src="Level.js">
+</script>
+
+<script type="text/javascript" src="LevelOne.js">
+</script>
+
+<script type="text/javascript" src="MapStorage.js">
+</script>
+
+<script type="text/javascript" src="Character.js">
+</script>
+
+<script type="text/javascript" src="Gun.js">
+</script>
+
+<script type="text/javascript" src="Bullet.js">
+</script>
+
+<script type="text/javascript" src="BouncingEnemy.js">
+</script>
+
+<script type="text/javascript" src="Spawn.js">
+</script>
+
+
+<script type="text/javascript" src="Menu.js">
+</script>
+
+<script type="text/javascript" src="reloadAnim.js">
+</script>
+
+<script type="text/javascript" src="scoreMenu.js">
+</script>
+
+<script type="text/javascript" src="Marcador.js">
+</script>
+
+<script>
+var canvas=document.getElementById("canvas");
+var ctx=canvas.getContext("2d");
+canvas.width=640;
+canvas.height=640;
+
+var DirectionState=
+{
+  North:0,
+  East:1,
+  West:2,
+  South:3,
+}
+
+var maps=new MapStorage();
+var levels=[
+  new LevelOne(maps.map1),
+  new LevelOne(maps.map2),
+  new LevelOne(maps.map3),
+  new LevelOne(maps.map4),
+
+
+];
+var actualLevel=new Menu();
+var actualLevelIndex=0;
+var deltaTime=0;
+var marcador;
+setTimeout(Init,17);
+
+function Init()
+{
+
+  setTimeout(Update,17);
+
+}
+
+
+
+function Update()
+{
+  actualLevel.Update();
+  Draw();
+  setTimeout(Update,17);
+}
+
+
+function Draw() //equivalente al update
+{
+  actualLevel.Draw();
+
+}
+
+function loadLevel()
+{
+  //actualLevel.player.Marcador.Delete();
+  if(actualLevelIndex+1<levels.length)
+  {
+    actualLevelIndex++;
+    actualLevel=levels[actualLevelIndex];
+  }
+  else
+  {
+    actualLevelIndex=0;
+    actualLevel=levels[actualLevelIndex];
+  }
+  actualLevel.Init();
+
+  //Init();
+
+}
+function loadEspecificLevel(level)
+{
+  //actualLevel.player.Marcador.Delete();
+
+  actualLevel=level;
+  actualLevel.Init();
+
+  //Init();
+
+}
+
+    addEventListener("mousemove",mousemove); //detecta la posicion del raton
+
+    document.addEventListener('keydown',function(event){
+      actualLevel.KeyDownEvent(event);
+
+
+    });
+
+    document.addEventListener('keyup', function(event){
+      actualLevel.KeyUpEvent(event);
+    }
+    );
+
+
+  function KeyDownEvent()
+   {
+     actualLevel.KeyDownEvent(event);
+   }
+   function keyUpEvent(event)
+    {
+      actualLevel.KeyUpEvent(event);
+    }
+    function mousemove(e) //detecta la posicion del raton
+    {
+      /*mouseX=e.clientX;
+      mouseY=e.clientY;*/
+
+    }
+
+</script>
+
+<body>
+</body>
+</html>

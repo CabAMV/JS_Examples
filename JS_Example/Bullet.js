@@ -1,0 +1,21 @@
+class Bullet extends Rectangle
+{
+  constructor(img,X,Y,width,height,shootSpeed,Direction,damage)
+  {
+    super(img,X,Y,width,height);
+    this.Speed=shootSpeed;
+    this.Damage=damage
+    this.Direction=Direction;
+  }
+  move()
+  {
+    if(this.Direction==DirectionState.East)
+        this.X+=this.Speed;
+    if(this.Direction==DirectionState.West)
+        this.X-=this.Speed;
+    if(this.Direction==DirectionState.South)
+        this.Y+=this.Speed;
+    if(this.Direction==DirectionState.North)
+        this.Y-=this.Speed;
+  }
+}
